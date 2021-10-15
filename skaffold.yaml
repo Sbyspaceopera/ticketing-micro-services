@@ -1,0 +1,89 @@
+apiVersion: skaffold/v2beta4
+kind: Config
+build:
+  googleCloudBuild: { projectId: mythical-patrol-326511 }
+  tagPolicy:
+    sha256: {}
+  artifacts:
+    - image: eu.gcr.io/mythical-patrol-326511/auth
+      context: auth
+      sync:
+        infer:
+          - "src/**/*.ts"
+    - image: eu.gcr.io/mythical-patrol-326511/client
+      context: client
+      sync:
+        infer:
+          - "**/*.js"
+    - image: eu.gcr.io/mythical-patrol-326511/tickets
+      context: tickets
+      sync:
+        infer:
+          - "src/**/*.ts"
+    - image: eu.gcr.io/mythical-patrol-326511/orders
+      context: orders
+      sync:
+        infer:
+          - "src/**/*.ts"
+    - image: eu.gcr.io/mythical-patrol-326511/expiration
+      context: expiration
+      sync:
+        infer:
+          - "src/**/*.ts"
+    - image: eu.gcr.io/mythical-patrol-326511/payments
+      context: payments
+      sync:
+        infer:
+          - "src/**/*.ts"
+
+deploy:
+  kubectl:
+    manifests:
+      - ./infra/k8s/*.yaml
+profiles:
+  - name: cloudbuild
+    build:
+      googleCloudBuild: { projectId: mythical-patrol-326511 }
+      artifacts:
+        - image: eu.gcr.io/mythical-patrol-326511/auth
+          context: auth
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            infer:
+              - "src/**/*.ts"
+        - image: eu.gcr.io/mythical-patrol-326511/client
+          context: client
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            infer:
+              - "**/*.js"
+        - image: eu.gcr.io/mythical-patrol-326511/tickets
+          context: tickets
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            infer:
+              - "src/**/*.ts"
+        - image: eu.gcr.io/mythical-patrol-326511/orders
+          context: orders
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            infer:
+              - "src/**/*.ts"
+        - image: eu.gcr.io/mythical-patrol-326511/expiration
+          context: expiration
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            infer:
+              - "src/**/*.ts"
+        - image: eu.gcr.io/mythical-patrol-326511/payments
+          context: payments
+          docker:
+            dockerfile: Dockerfile
+          sync:
+            infer:
+              - "src/**/*.ts"
