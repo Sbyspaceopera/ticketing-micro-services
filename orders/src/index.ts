@@ -11,8 +11,11 @@ import { ExpirationCompleteListener } from "./events/listeners/expiration-comple
 import { PaymentCreatedListener } from "./events/listeners/payment-created-listener";
 
 const start = async () => {
+<<<<<<< HEAD
 	console.log("Starting....");
 
+=======
+>>>>>>> 377fa722cba89dfae1df6369890b6997c338bff6
 	if (!process.env.JWT_KEY) {
 		throw new Error("JWT_KEY must be defined");
 	}
