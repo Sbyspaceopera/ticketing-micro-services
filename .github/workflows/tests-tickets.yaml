@@ -3,13 +3,8 @@ name: tests-tickets
 on:
   pull_request:
     paths:
-<<<<<<< HEAD
       - "tickets/**"
 
-=======
-      - 'tickets/**'
-  
->>>>>>> 309dbba58581b76b540365d31beddefdf5e7d402
 jobs:
   build:
     runs-on: ubuntu-latest
